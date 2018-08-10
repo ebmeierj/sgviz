@@ -1,5 +1,5 @@
 require "gviz"
-require "aws-sdk-resources"
+require "aws-sdk-ec2"
 
 class Sgviz::Generator < Gviz
   def initialize name = :G, type = :digraph, options = {}
@@ -174,25 +174,10 @@ class Sgviz::Generator < Gviz
   end
 
   def aws_configuration
-    hash = {}
-
-    [:profile, :access_key_id, :secret_access_key, :region].each do |option|
-      hash.update(option => options[option]) if options[option]
-    end
-
-    hash.update(region: own_region) if hash[:region].nil?
-    hash
-  end
-
-  def own_region
-    @own_region ||= begin
-      require "net/http"
-
-      timeout 3 do
-        Net::HTTP.get("169.254.169.254", "/latest/meta-data/placement/availability-zone").chop
+    {}.tap do |hsh|
+      [:profile, :access_key_id, :secret_access_key, :session_token, :region].each do |option|
+        hsh.update(option => options[option]) if options[option]
       end
-    rescue
-      nil
     end
   end
 

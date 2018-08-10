@@ -13,6 +13,10 @@ class Sgviz::CLI < Thor
     desc:    "AWS secret access key.",
     aliases: [:s]
 
+  class_option :session_token,
+    desc:    "AWS session token.",
+    aliases: [:s]
+
   class_option :region,
     desc:    "AWS region.",
     aliases: [:r]

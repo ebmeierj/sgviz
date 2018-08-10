@@ -23,8 +23,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "gviz"
   spec.add_dependency "thor"
-  spec.add_dependency "aws-sdk-resources"
-  spec.add_dependency "aws-sdk-core"
+  spec.add_dependency "aws-sdk-ec2"
 
   spec.add_development_dependency "pry"
   spec.add_development_dependency "awesome_print"
